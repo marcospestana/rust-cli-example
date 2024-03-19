@@ -20,4 +20,4 @@ jobs:
     - name: Build
       run: cargo build --verbose
     - name: cargo format
-      run: cargo fmt -- verbose
+      run: cargo fmt
