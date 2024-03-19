@@ -1,8 +1,9 @@
-use clap::{App, Arg, ColorChoice};
+use clap::{Command, Arg};
+use clap::ColorChoice;
 use blkrs::run_lsblk;
 
 fn main() {
-    let matches = App::new("lsblk")
+    let matches = Command::new("lsblk")
         .version("0.0.1")
         .author("Alfredo Deza")
         .about("lsblk in Rust")
@@ -15,8 +16,8 @@ fn main() {
         )
         .get_matches();
 
-    if let Some(device) = matches.value_of("device") {
-        let output = serde_json::to_string(&run_lsblk(device)).unwrap();
+    if let Some(device) = matches.get_one::<String>("device") {
+        let output = serde_json::to_string(&run_lsblk(&device)).unwrap();
         println!("{}", output);
     } else {
         println!("No device provided");
